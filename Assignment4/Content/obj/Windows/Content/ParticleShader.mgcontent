@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PipelineBuildEvent xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <SourceFile>C:/Users/rober/CPI411/Lab10_RobDavis/Assignment4/Content/ParticleShader.fx</SourceFile>
+  <SourceTime>2022-04-13T16:13:49.5085047-07:00</SourceTime>
+  <DestFile>C:/Users/rober/CPI411/Lab10_RobDavis/Assignment4/Content/bin/Windows/Content/ParticleShader.xnb</DestFile>
+  <DestTime>2022-04-13T16:13:51.8869668-07:00</DestTime>
+  <Importer>EffectImporter</Importer>
+  <ImporterTime>2020-08-10T09:17:54-07:00</ImporterTime>
+  <Processor>EffectProcessor</Processor>
+  <ProcessorTime>2020-08-10T09:17:54-07:00</ProcessorTime>
+  <Parameters>
+    <Key>DebugMode</Key>
+    <Value>Auto</Value>
+  </Parameters>
+  <Dependencies />
+  <BuildAsset />
+  <BuildOutput />
+</PipelineBuildEvent>
