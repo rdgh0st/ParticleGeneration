@@ -167,18 +167,18 @@ namespace Assignment4
             {
                 particleStyle = 2;
             } else if (Keyboard.GetState().IsKeyDown(Keys.F4))
-            {
+            {  
                 particleStyle = 3;
             }
 
-            if (Keyboard.GetState().IsKeyDown(Keys.Question) && !preKey.IsKeyDown(Keys.Question)) // GET RIGHT KEYCODE
+            if (Keyboard.GetState().IsKeyDown(Keys.OemQuestion) && !preKey.IsKeyDown(Keys.OemQuestion)) // GET RIGHT KEYCODE
             {
                 showParams = !showParams;   
             }
 
             if (Keyboard.GetState().IsKeyDown(Keys.F) && !preKey.IsKeyDown(Keys.F))
             {
-                if (Keyboard.GetState().IsKeyDown(Keys.LShift))
+                if (Keyboard.GetState().IsKeyDown(Keys.LeftShift))
                 {
                     particleFriction -= 0.1f;
                 }
@@ -190,7 +190,7 @@ namespace Assignment4
             
             if (Keyboard.GetState().IsKeyDown(Keys.R) && !preKey.IsKeyDown(Keys.R))
             {
-                if (Keyboard.GetState().IsKeyDown(Keys.LShift))
+                if (Keyboard.GetState().IsKeyDown(Keys.LeftShift))
                 {
                     particleResilience -= 0.1f;
                 }
@@ -202,7 +202,7 @@ namespace Assignment4
             
             if (Keyboard.GetState().IsKeyDown(Keys.A) && !preKey.IsKeyDown(Keys.A))
             {
-                if (Keyboard.GetState().IsKeyDown(Keys.LShift))
+                if (Keyboard.GetState().IsKeyDown(Keys.LeftShift))
                 {
                     particleAge -= 1;
                 }
