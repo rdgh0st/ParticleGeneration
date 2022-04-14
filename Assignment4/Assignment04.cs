@@ -29,10 +29,15 @@ namespace Assignment4
         float distance = 20f;
         float distance_default = 20f;
         MouseState preMouse;
+        KeyboardState preKey;
 
         int currentTechnique = 0;
         int particleStyle = 0;
         float particleAge = 10;
+        float particleResilience = 0.5f;
+        float particleFriction = 0.5f;
+
+        bool showParams = true;
 
         Vector3 particlePosition;
         System.Random random;
@@ -71,6 +76,7 @@ namespace Assignment4
             fire = Content.Load<Texture2D>("fire");
             smoke = Content.Load<Texture2D>("smoke");
             water = Content.Load<Texture2D>("water");
+            font = Content.Load<SpriteFont>("font"); // create spritefont in mgcb editor
             texture = water;
 
             random = new System.Random();
@@ -165,6 +171,12 @@ namespace Assignment4
                 particleStyle = 3;
             }
 
+            if (Keyboard.GetState().IsKeyDown(Keys.Question) && !preKey.IsKeyDown(Keys.Question)) // GET RIGHT KEYCODE
+            {
+                showParams = !showParams;   
+            }
+
+            preKey = Keyboard.GetState();
             preMouse = Mouse.GetState();
             // Update Camera
             cameraPosition = Vector3.Transform(new Vector3(0, 0, distance),
@@ -204,8 +216,8 @@ namespace Assignment4
                     Particle particle = particleManager.getNext();
                     particle.Position = particlePosition;
                     particle.Bounce = true;
-                    particle.Resilience = 0.5f;
-                    particle.Friction = 0.5f;
+                    particle.Resilience = particleResilience;
+                    particle.Friction = particleFriction;
                     particle.WindForce = new Vector3(0.01f, 0, 0);
                     particle.Velocity = new Vector3(random.Next(-2, 2), 5, random.Next(-2, 2));
                     particle.Acceleration = new Vector3(0, -5, 0); // gravity in y
