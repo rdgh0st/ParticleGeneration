@@ -176,6 +176,42 @@ namespace Assignment4
                 showParams = !showParams;   
             }
 
+            if (Keyboard.GetState().IsKeyDown(Keys.F) && !preKey.IsKeyDown(Keys.F))
+            {
+                if (Keyboard.GetState().IsKeyDown(Keys.LShift))
+                {
+                    particleFriction -= 0.1f;
+                }
+                else
+                {
+                    particleFriction += 0.1f;
+                }
+            }
+            
+            if (Keyboard.GetState().IsKeyDown(Keys.R) && !preKey.IsKeyDown(Keys.R))
+            {
+                if (Keyboard.GetState().IsKeyDown(Keys.LShift))
+                {
+                    particleResilience -= 0.1f;
+                }
+                else
+                {
+                    particleResilience += 0.1f;
+                }
+            }
+            
+            if (Keyboard.GetState().IsKeyDown(Keys.A) && !preKey.IsKeyDown(Keys.A))
+            {
+                if (Keyboard.GetState().IsKeyDown(Keys.LShift))
+                {
+                    particleAge -= 1;
+                }
+                else
+                {
+                    particleAge += 1;
+                }
+            }
+
             preKey = Keyboard.GetState();
             preMouse = Mouse.GetState();
             // Update Camera
