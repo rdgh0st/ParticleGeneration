@@ -36,8 +36,10 @@ namespace Assignment4
         float particleAge = 10;
         float particleResilience = 0.5f;
         float particleFriction = 0.5f;
+        Vector3 windDirection = new Vector3(0.01f, 0, 0);
 
         bool showParams = true;
+        int shape = 0;
 
         Vector3 particlePosition;
         System.Random random;
@@ -166,8 +168,13 @@ namespace Assignment4
             } else if (Keyboard.GetState().IsKeyDown(Keys.F3))
             {
                 particleStyle = 2;
-            } else if (Keyboard.GetState().IsKeyDown(Keys.F4))
+            } else if (Keyboard.GetState().IsKeyDown(Keys.F4) && !preKey.IsKeyDown(Keys.F4))
             {  
+                shape++;
+                if (shape > 2)
+                {
+                    shape = 0;
+                }
                 particleStyle = 3;
             }
 
@@ -254,7 +261,7 @@ namespace Assignment4
                     particle.Bounce = true;
                     particle.Resilience = particleResilience;
                     particle.Friction = particleFriction;
-                    particle.WindForce = new Vector3(0.01f, 0, 0);
+                    particle.WindForce = windDirection;
                     particle.Velocity = new Vector3(random.Next(-2, 2), 5, random.Next(-2, 2));
                     particle.Acceleration = new Vector3(0, -5, 0); // gravity in y
                     particle.MaxAge = particleAge;
@@ -262,17 +269,42 @@ namespace Assignment4
                 }
                 else if (particleStyle == 3)
                 {
-                    for (int i = 0; i < 60; i++)
+                    if (shape == 0)
                     {
                         Particle particle = particleManager.getNext();
                         particle.Position = particlePosition;
-                        // particle.Velocity = new Vector3(random.Next(-5, 5), 0, 0);
-                        double a = System.Math.PI * (i * 6) / 180.0;
-                        particle.Velocity = new Vector3(
-                            5.0f * (float)System.Math.Sin(a), 0, 5.0f * (float)System.Math.Cos(a)); // random in first
-                        particle.Acceleration = new Vector3(0, 0, 0); // gravity in y
+                        particle.Velocity = new Vector3(0, 5, 0);
                         particle.MaxAge = particleAge;
                         particle.Init();
+                    } else if (shape == 1)
+                    {
+                        for (int i = 0; i < 60; i++)
+                        {
+                            Particle particle = particleManager.getNext();
+                            particle.Position = particlePosition;
+                            // particle.Velocity = new Vector3(random.Next(-5, 5), 0, 0);
+                            double a = System.Math.PI * (i * 6) / 180.0;
+                            particle.Velocity = new Vector3(
+                                5.0f * (float)System.Math.Sin(a), 0, 5.0f * (float)System.Math.Cos(a)); // random in first
+                            particle.Acceleration = new Vector3(0, 0, 0); // gravity in y
+                            particle.MaxAge = particleAge;
+                            particle.Init();
+                        }
+                    }
+                    else
+                    {
+                        for (int i = 0; i < 30; i++)
+                        {
+                            Particle particle = particleManager.getNext();
+                            particle.Position = particlePosition;
+                            // particle.Velocity = new Vector3(random.Next(-5, 5), 0, 0);
+                            double a = System.Math.PI * (i * 6) / 180.0;
+                            particle.Velocity = new Vector3(
+                                5.0f * (float)System.Math.Sin(a), 0, 5.0f * (float)System.Math.Cos(a)); // random in first
+                            particle.Acceleration = new Vector3(0, 0, 0); // gravity in y
+                            particle.MaxAge = particleAge;
+                            particle.Init();
+                        }
                     }
                 }
 
@@ -318,7 +350,73 @@ namespace Assignment4
             effect.Parameters["InverseCamera"].SetValue(invertCamera);
 
             particleManager.Draw(GraphicsDevice);
+            
+            spriteBatch.Begin();
+            if (showParams)
+            {
+                spriteBatch.DrawString(font, "Angle the camera: Drag Left Mouse", Vector2.UnitX + Vector2.UnitY * 12, Color.White);
+                spriteBatch.DrawString(font, "Zoom the camera: Drag Right Mouse", Vector2.UnitX + Vector2.UnitY * 30, Color.White);
+                spriteBatch.DrawString(font, "Pan the camera: Drag Middle Mouse", Vector2.UnitX + Vector2.UnitY * 48, Color.White);
+                spriteBatch.DrawString(font, "Rotate Light: Arrow Keys", Vector2.UnitX + Vector2.UnitY * 66, Color.White);
+                spriteBatch.DrawString(font, "Reset: S", Vector2.UnitX + Vector2.UnitY * 84, Color.White);
+                spriteBatch.DrawString(font, "Emit Particles: P", Vector2.UnitX + Vector2.UnitY * 102, Color.White);
+                spriteBatch.DrawString(font, "Change Particle: 1/2/3/4", Vector2.UnitX + Vector2.UnitY * 120, Color.White);
+                spriteBatch.DrawString(font, "Change Emission: F1/F2/F3, F4 to toggle shape", Vector2.UnitX + Vector2.UnitY * 138, Color.White);
+                spriteBatch.DrawString(font, "Friction: F / Shift and F", Vector2.UnitX + Vector2.UnitY * 156, Color.White);
+                spriteBatch.DrawString(font, "Resilience: R / Shift and R", Vector2.UnitX + Vector2.UnitY * 174, Color.White);
+                spriteBatch.DrawString(font, "Age: A / Shift and A", Vector2.UnitX + Vector2.UnitY * 192, Color.White);
+                spriteBatch.DrawString(font, "Help: ?", Vector2.UnitX + Vector2.UnitY * 210, Color.White);
+                
+                switch (particleStyle)
+                {
+                    case 0:
+                        spriteBatch.DrawString(font, "Particle Style: Fountain no Gravity", Vector2.UnitX + Vector2.UnitY * 228, Color.White);
+                        break;
+                    case 1:
+                        spriteBatch.DrawString(font, "Particle Style: Fountain with Gravity", Vector2.UnitX + Vector2.UnitY * 228, Color.White);
+                        break;
+                    case 2:
+                        spriteBatch.DrawString(font, "Particle Style: Fountain with Gravity/Bounce/Wind", Vector2.UnitX + Vector2.UnitY * 228, Color.White);
+                        break;
+                    case 3:
+                        spriteBatch.DrawString(font, "Particle Style: Circle/Curve/Square Fountain", Vector2.UnitX + Vector2.UnitY * 228, Color.White);
+                        break;
+                }
 
+                switch (currentTechnique)
+                {
+                    case 0:
+                        spriteBatch.DrawString(font, "Particle Texture: None", Vector2.UnitX + Vector2.UnitY * 246, Color.White);
+                        break;
+                    case 1:
+                        spriteBatch.DrawString(font, "Particle Texture: Smoke", Vector2.UnitX + Vector2.UnitY * 246, Color.White);
+                        break;
+                    case 2:
+                        spriteBatch.DrawString(font, "Particle Texture: Water", Vector2.UnitX + Vector2.UnitY * 246, Color.White);
+                        break;
+                    case 3:
+                        spriteBatch.DrawString(font, "Particle Texture: Fire", Vector2.UnitX + Vector2.UnitY * 246, Color.White);
+                        break;
+                }
+                spriteBatch.DrawString(font, "Particle Age: " + particleAge, Vector2.UnitX + Vector2.UnitY * 264, Color.White);
+                spriteBatch.DrawString(font, "Particle Resilience: " + particleResilience, Vector2.UnitX + Vector2.UnitY * 282, Color.White);
+                spriteBatch.DrawString(font, "Particle Friction: " + particleFriction, Vector2.UnitX + Vector2.UnitY * 300, Color.White);
+                spriteBatch.DrawString(font, "Wind Velocity: " + windDirection, Vector2.UnitX + Vector2.UnitY * 318, Color.White);
+                switch (shape)
+                {
+                    case 0:
+                        spriteBatch.DrawString(font, "Shape: Square", Vector2.UnitX + Vector2.UnitY * 336, Color.White);
+                        break;
+                    case 1:
+                        spriteBatch.DrawString(font, "Shape: Circle", Vector2.UnitX + Vector2.UnitY * 336, Color.White);
+                        break;
+                    case 2:
+                        spriteBatch.DrawString(font, "Shape: Curve", Vector2.UnitX + Vector2.UnitY * 336, Color.White);
+                        break;
+                }
+                // friction, resilience, age
+            }
+            spriteBatch.End();
 
             base.Draw(gameTime);
         }

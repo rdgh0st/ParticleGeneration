@@ -5,12 +5,14 @@
   <Config />
   <SourceFiles>
     <File>C:/Users/rober/CPI411/Lab10_RobDavis/Assignment4/Content/fire.png</File>
+    <File>C:/Users/rober/CPI411/Lab10_RobDavis/Assignment4/Content/font.spritefont</File>
     <File>C:/Users/rober/CPI411/Lab10_RobDavis/Assignment4/Content/ParticleShader.fx</File>
     <File>C:/Users/rober/CPI411/Lab10_RobDavis/Assignment4/Content/Plane(1).FBX</File>
     <File>C:/Users/rober/CPI411/Lab10_RobDavis/Assignment4/Content/smoke.png</File>
     <File>C:/Users/rober/CPI411/Lab10_RobDavis/Assignment4/Content/water.png</File>
   </SourceFiles>
   <DestFiles>
+    <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />

@@ -55,3 +55,4 @@ C:\Users\rober\CPI411\Lab10_RobDavis\Assignment4\obj\Debug\netcoreapp3.1\Assignm
 C:\Users\rober\CPI411\Lab10_RobDavis\Assignment4\obj\Debug\netcoreapp3.1\Assignment4.pdb
 C:\Users\rober\CPI411\Lab10_RobDavis\Assignment4\obj\Debug\netcoreapp3.1\Assignment4.genruntimeconfig.cache
 C:\Users\rober\CPI411\Lab10_RobDavis\Assignment4\obj\Debug\netcoreapp3.1\Assignment4.csproj.AssemblyReference.cache
+C:\Users\rober\CPI411\Lab10_RobDavis\Assignment4\bin\Debug\netcoreapp3.1\Content\font.xnb
